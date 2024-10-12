@@ -96,7 +96,7 @@ export async function signup({
       },
     });
     if (newUser) {
-      return JSON.stringify(newUser);
+      return newUser;
     } else {
       throw new Error("Something went wrong");
     }
