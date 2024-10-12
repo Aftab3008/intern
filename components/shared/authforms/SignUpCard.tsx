@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Separator } from "@/components/ui/separator";
-import { CircleCheckBig, Ticket, TriangleAlert } from "lucide-react";
+import { CircleCheckBig, Loader2, Ticket, TriangleAlert } from "lucide-react";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { SignUpSchema } from "@/lib/zodSchema";
 import Link from "next/link";
 import { signup } from "@/utils/actions/actions";
+import Image from "next/image";
 
 export const SignUpCard = () => {
   const [error, setError] = useState("");
@@ -58,7 +59,10 @@ export const SignUpCard = () => {
   return (
     <Card className="w-full max-w-md p-8">
       <CardHeader className="px-0 pt-0">
-        <CardTitle>Sign up to continue</CardTitle>
+        <CardTitle className="flex flex-col gap-4">
+          <Image src="/logo.png" alt="logo" width={40} height={40} />
+          <p>Sign up to continue</p>
+        </CardTitle>
         <CardDescription>Use your email service to continue</CardDescription>
       </CardHeader>
       {!!error && (
@@ -148,16 +152,23 @@ export const SignUpCard = () => {
               className="w-full text-sm py-4"
               disabled={form.formState.isSubmitting || pending}
             >
-              Sign up
+              {pending || form.formState.isSubmitting ? (
+                <>
+                  <Loader2 className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
+                  Signing up...
+                </>
+              ) : (
+                "Sign up"
+              )}
             </Button>
           </form>
         </Form>
         <Separator />
-        <p className="text-xs text-muted-foreground">
-          Already have an account?{" "}
+        <p className="text-xs text-muted-foreground flex justify-center items-center">
+          Already have an account?
           <Link
             href="/auth/signin"
-            className="cursor-pointer text-sky-700 hover:underline"
+            className="cursor-pointer text-sky-700 hover:underline ml-0.5"
           >
             Sign in
           </Link>

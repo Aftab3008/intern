@@ -19,12 +19,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
-import { TriangleAlert } from "lucide-react";
+import { Loader2, TriangleAlert } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { SignInSchema } from "@/lib/zodSchema";
 import Link from "next/link";
+import Image from "next/image";
 
 export const SignInCard = () => {
   const [error, setError] = useState("");
@@ -55,10 +56,11 @@ export const SignInCard = () => {
   return (
     <Card className="w-full max-w-md p-8">
       <CardHeader className="px-0 pt-0">
-        <CardTitle>Log in to continue</CardTitle>
-        <CardDescription>
-          Use your email or another service to continue
-        </CardDescription>
+        <CardTitle className="flex flex-col gap-4">
+          <Image src="/logo.png" alt="logo" width={40} height={40} />
+          <p>Log in to continue</p>
+        </CardTitle>
+        <CardDescription>Use your email service to continue</CardDescription>
       </CardHeader>
       {!!error && (
         <div className="mb-6 flex items-center gap-x-2 rounded-md bg-destructive/15 p-3 text-sm text-destructive">
@@ -104,16 +106,23 @@ export const SignInCard = () => {
               className="w-full text-sm py-4"
               disabled={pending}
             >
-              Sign in
+              {pending || form.formState.isSubmitting ? (
+                <>
+                  <Loader2 className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
+                  Signing in...
+                </>
+              ) : (
+                "Sign in"
+              )}
             </Button>
           </form>
         </Form>
         <Separator />
-        <p className="text-xs text-muted-foreground">
-          Don&apos;t have an account?{" "}
+        <p className="text-xs text-muted-foreground flex items-center justify-center">
+          Don&apos;t have an account?
           <Link
             href="/auth/signup"
-            className="cursor-pointer text-sky-700 hover:underline"
+            className="cursor-pointer text-sky-700 hover:underline ml-0.5"
           >
             Sign up
           </Link>
