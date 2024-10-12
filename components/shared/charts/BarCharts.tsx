@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Bar,
   BarChart,
@@ -6,59 +8,35 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  Cell,
 } from "recharts";
 
-export default function BarCharts() {
+interface CoinData {
+  name: string;
+  price: string;
+  color: string;
+}
+
+export default function BarCharts({ data }: { data: CoinData[] }) {
+  const formattedData = data.map((coin) => ({
+    name: coin.name,
+    price: parseFloat(coin.price),
+    color: coin.color,
+  }));
+
   return (
     <>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          width={730}
-          height={250}
-          data={[
-            {
-              name: "Jan",
-              high: 4000,
-              low: 2400,
-            },
-            {
-              name: "Feb",
-              high: 5000,
-              low: 1500,
-            },
-            {
-              name: "Mar",
-              high: 6000,
-              low: 3000,
-            },
-            {
-              name: "Apr",
-              high: 6500,
-              low: 4500,
-            },
-            {
-              name: "May",
-              high: 7000,
-              low: 2200,
-            },
-            {
-              name: "Jun",
-              high: 8000,
-              low: 3500,
-            },
-            {
-              name: "Jul",
-              high: 7400,
-              low: 5500,
-            },
-          ]}
-        >
+        <BarChart width={730} height={250} data={formattedData}>
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="high" fill="#82ca9d" />
-          <Bar dataKey="low" fill="#FA8072" />
+          <Bar dataKey="price">
+            {formattedData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} />
+            ))}
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </>

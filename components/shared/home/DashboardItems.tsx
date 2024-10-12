@@ -21,7 +21,7 @@ export function DashboardItems() {
           )}
         >
           <item.icon className="size-4" />
-          {item.name}
+          <span className="hidden md:inline">{item.name}</span>
         </Link>
       ))}
     </>
