@@ -45,6 +45,8 @@ export const SignInCard = () => {
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
+      } else if (error && typeof error === "object" && "digest" in error) {
+        setError("An error occurred. Please try again later.");
       } else {
         setError("Something went wrong");
       }
