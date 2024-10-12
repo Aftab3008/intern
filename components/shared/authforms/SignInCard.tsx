@@ -41,7 +41,12 @@ export const SignInCard = () => {
   async function onSubmit(values: z.infer<typeof SignInSchema>) {
     setPending(true);
     try {
-      await login(values);
+      const response = await login(values);
+      if (response && response.error) {
+        setError(response.error.message);
+      } else {
+        // Handle successful login if needed
+      }
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

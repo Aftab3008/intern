@@ -28,15 +28,29 @@ export async function login({
         email,
       });
       if (resendError) {
-        throw new Error("Failed to resend confirmation email");
+        return {
+          error: {
+            message: "Failed to resend confirmation email",
+          },
+        };
       }
-      throw new Error(
-        "Email not confirmed. A confirmation email has been resent."
-      );
+      return {
+        error: {
+          message: "Email not confirmed. Please check your email",
+        },
+      };
     } else if (error.code === "invalid_credentials") {
-      throw new Error("Invalid email or password");
+      return {
+        error: {
+          message: "Invalid email or password",
+        },
+      };
     } else {
-      throw new Error("Something went wrong");
+      return {
+        error: {
+          message: "Something went wrong",
+        },
+      };
     }
   }
 
@@ -83,7 +97,11 @@ export async function signup({
     });
 
     if (getUser) {
-      throw new Error("User already exists");
+      return {
+        error: {
+          message: "User already exists",
+        },
+      };
     }
 
     const newUser = await prisma.user.create({
@@ -96,9 +114,18 @@ export async function signup({
       },
     });
     if (newUser) {
-      return newUser;
+      return {
+        success: "Verification email sent",
+        data: {
+          user: newUser,
+        },
+      };
     } else {
-      throw new Error("Something went wrong");
+      return {
+        error: {
+          message: "Something went wrong",
+        },
+      };
     }
   }
 }

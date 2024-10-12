@@ -45,9 +45,11 @@ export const SignUpCard = () => {
   async function onSubmit(values: z.infer<typeof SignUpSchema>) {
     setPending(true);
     try {
-      const newUser = await signup(values);
-      if (newUser) {
-        setSuccess("Verification email sent.");
+      const response = await signup(values);
+      if (response && response.error) {
+        setError(response.error.message);
+      } else if (response && response.success) {
+        setSuccess(response.success);
       }
     } catch (error) {
       setError((error as Error).message);
