@@ -4,7 +4,11 @@ import LineCharts from "@/components/shared/charts/LineCharts";
 import PieCharts from "@/components/shared/charts/PieCharts";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { appleData, getCoinsPrice } from "@/utils/actions/apiactions";
+import {
+  appleData,
+  getCoinsPrice,
+  getPriceData,
+} from "@/utils/actions/apiactions";
 import {
   AreaChart,
   BarChart,
@@ -14,7 +18,9 @@ import {
 } from "lucide-react";
 
 export default async function ChartsPage() {
-  const { coins: piechartData, prices: bargaphData } = await getCoinsPrice();
+  const piechartData = await getCoinsPrice();
+  const bargaphData = await getPriceData();
+
   if (!piechartData || !bargaphData) {
     return (
       <div className="flex items-center justify-center">

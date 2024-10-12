@@ -23,6 +23,21 @@ export async function getCoinsPrice() {
         color: coin.color,
       })
     );
+    return coins;
+  } catch (error) {
+    return { error: true, message: "Error fetching data" };
+  }
+}
+export async function getPriceData() {
+  try {
+    const response = await fetch(
+      "https://api.coinranking.com/v2/coins?limit=8&orderBy=marketCap&orderDirection=desc",
+      options
+    );
+    if (!response.ok) {
+      return { error: true, message: "Error fetching data" };
+    }
+    const data = await response.json();
     const prices = data.data.coins.map(
       (coin: { name: string; price: string; color: string }) => ({
         name: coin.name,
@@ -30,7 +45,7 @@ export async function getCoinsPrice() {
         color: coin.color,
       })
     );
-    return { coins, prices };
+    return prices;
   } catch (error) {
     return { error: true, message: "Error fetching data" };
   }
