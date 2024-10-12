@@ -1,10 +1,13 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
 import AreaCharts from "@/components/shared/charts/AreaCharts";
 import BarCharts from "@/components/shared/charts/BarCharts";
 import LineCharts from "@/components/shared/charts/LineCharts";
 import PieCharts from "@/components/shared/charts/PieCharts";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { getCoinsPrice, getPriceData } from "@/utils/actions/apiactions";
+import { fetchCoinData } from "@/utils/actions/apiactions";
 import {
   AreaChart,
   BarChart,
@@ -13,13 +16,25 @@ import {
   PieChart,
 } from "lucide-react";
 
-export default async function ChartsPage() {
-  const { coins: piechartData } = await getCoinsPrice();
-  const { prices: bargraphData } = await getPriceData();
+const ChartsPage = () => {
+  const [piechartData, setPiechartData] = useState(null);
+  const [bargraphData, setBargraphData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!piechartData || !bargraphData) {
+  useEffect(() => {
+    const fetchData = async () => {
+      const { coins, prices } = await fetchCoinData();
+      setPiechartData(coins);
+      setBargraphData(prices);
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading || !piechartData || !bargraphData) {
     return (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center w-full h-full">
         <Loader2 className="animate-spin h-10 w-10 text-primary" />
         <span className="ml-2">Loading user data...</span>
       </div>
@@ -80,4 +95,6 @@ export default async function ChartsPage() {
       </BentoGrid>
     </ScrollArea>
   );
-}
+};
+
+export default ChartsPage;

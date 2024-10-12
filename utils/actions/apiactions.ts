@@ -6,47 +6,43 @@ const options = {
   },
 };
 
-export async function getCoinsPrice() {
+export async function fetchCoinData() {
   try {
-    const response = await fetch(
-      "https://api.coinranking.com/v2/coins?limit=8&orderBy=marketCap&orderDirection=desc",
-      options
-    );
-    if (!response.ok) {
+    const [coinsResponse, pricesResponse] = await Promise.all([
+      fetch(
+        "https://api.coinranking.com/v2/coins?limit=8&orderBy=marketCap&orderDirection=desc",
+        options
+      ),
+      fetch(
+        "https://api.coinranking.com/v2/coins?limit=8&orderBy=marketCap&orderDirection=desc",
+        options
+      ),
+    ]);
+
+    if (!coinsResponse.ok || !pricesResponse.ok) {
       return { error: true, message: "Error fetching data" };
     }
-    const data = await response.json();
-    const coins = data.data.coins.map(
+
+    const coinsData = await coinsResponse.json();
+    const pricesData = await pricesResponse.json();
+
+    const coins = coinsData.data.coins.map(
       (coin: { name: string; marketCap: string; color: string }) => ({
         name: coin.name,
         marketCap: coin.marketCap,
         color: coin.color,
       })
     );
-    return { coins };
-  } catch (error) {
-    return { error: true, message: "Error fetching data" };
-  }
-}
 
-export async function getPriceData() {
-  try {
-    const response = await fetch(
-      "https://api.coinranking.com/v2/coins?limit=8&orderBy=marketCap&orderDirection=desc",
-      options
-    );
-    if (!response.ok) {
-      return { error: true, message: "Error fetching data" };
-    }
-    const data = await response.json();
-    const prices = data.data.coins.map(
+    const prices = pricesData.data.coins.map(
       (coin: { name: string; price: string; color: string }) => ({
         name: coin.name,
         price: coin.price,
         color: coin.color,
       })
     );
-    return { prices };
+
+    return { coins, prices };
   } catch (error) {
     return { error: true, message: "Error fetching data" };
   }
