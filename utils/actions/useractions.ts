@@ -10,7 +10,7 @@ export async function getCurrentUser() {
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) {
-      throw new Error("User does not exists");
+      return null;
     }
     const userData = await prisma.user.findUnique({
       where: {
@@ -18,10 +18,10 @@ export async function getCurrentUser() {
       },
     });
     if (!userData) {
-      throw new Error("User not found");
+      return null;
     }
     return userData;
   } catch (error) {
-    throw new Error("Something went wrong");
+    return null;
   }
 }

@@ -1,18 +1,17 @@
+import { DashboardItems } from "@/components/shared/home/DashboardItems";
+import MobileSheet from "@/components/shared/home/MobileSheet";
+import LogoutButton from "@/components/shared/LogoutButton";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+import { getCurrentUser } from "@/utils/actions/useractions";
+import { Loader2, MailIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { LogOut, MailIcon } from "lucide-react";
-import { DashboardItems } from "@/components/shared/home/DashboardItems";
-import { getCurrentUser } from "@/utils/actions/useractions";
-import MobileSheet from "@/components/shared/home/MobileSheet";
-import { logout } from "@/utils/actions/actions";
-import LogoutButton from "@/components/shared/LogoutButton";
 
 export default async function layout({
   children,
@@ -20,6 +19,16 @@ export default async function layout({
   children: React.ReactNode;
 }) {
   const user = await getCurrentUser();
+
+  if (!user) {
+    return (
+      <div className="flex items-center justify-center">
+        <Loader2 className="animate-spin h-10 w-10 text-primary" />
+        <span className="ml-2">Loading user data...</span>
+      </div>
+    );
+  }
+
   return (
     <section className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">

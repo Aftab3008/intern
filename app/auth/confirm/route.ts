@@ -13,16 +13,26 @@ export async function GET(request: NextRequest) {
   if (token_hash && type) {
     const supabase = createClient();
 
-    const { error } = await supabase.auth.verifyOtp({
-      type,
-      token_hash,
-    });
-    if (!error) {
-      // redirect user to specified redirect URL or root of app
-      redirect(next);
+    try {
+      const { error } = await supabase.auth.verifyOtp({
+        type,
+        token_hash,
+      });
+
+      if (!error) {
+        // redirect user to specified redirect URL or root of app
+        redirect(next);
+        return;
+      } else {
+        console.error("OTP verification failed:", error);
+      }
+    } catch (err) {
+      console.error("An unexpected error occurred:", err);
     }
+  } else {
+    console.error("Missing token_hash or type in query parameters.");
   }
 
   // redirect the user to an error page with some instructions
-  redirect("/error");
+  redirect("/signin");
 }
