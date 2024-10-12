@@ -21,7 +21,7 @@ export default async function ChartsPage() {
   const piechartData = await getCoinsPrice();
   const bargaphData = await getPriceData();
 
-  if (!piechartData || !bargaphData) {
+  if (!piechartData && !bargaphData) {
     return (
       <div className="flex items-center justify-center">
         <Loader2 className="animate-spin h-10 w-10 text-primary" />
