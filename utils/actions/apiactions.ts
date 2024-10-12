@@ -20,6 +20,7 @@ export async function fetchCoinData() {
     ]);
 
     if (!coinsResponse.ok || !pricesResponse.ok) {
+      console.error("Error fetching data", coinsResponse, pricesResponse);
       return { error: true, message: "Error fetching data" };
     }
 
@@ -44,6 +45,7 @@ export async function fetchCoinData() {
 
     return { coins, prices };
   } catch (error) {
+    console.error("Error fetching data", error);
     return { error: true, message: "Error fetching data" };
   }
 }

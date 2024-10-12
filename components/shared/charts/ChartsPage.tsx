@@ -20,23 +20,44 @@ const ChartsPage = () => {
   const [piechartData, setPiechartData] = useState(null);
   const [bargraphData, setBargraphData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const { coins, prices } = await fetchCoinData();
-      setPiechartData(coins);
-      setBargraphData(prices);
-      setLoading(false);
+      setLoading(true);
+      try {
+        const result = await fetchCoinData();
+        console.log(result);
+        if (result.error) {
+          setError(result.message);
+        } else {
+          setPiechartData(result.coins);
+          setBargraphData(result.prices);
+        }
+      } catch (err) {
+        setError("An error occurred while fetching data.");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
   }, []);
 
-  if (loading || !piechartData || !bargraphData) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center w-full h-full">
         <Loader2 className="animate-spin h-10 w-10 text-primary" />
-        <span className="ml-2">Loading user data...</span>
+        <span className="ml-2">Loading...</span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center w-full h-full">
+        <span className="text-red-500">{error}</span>
       </div>
     );
   }
@@ -52,7 +73,7 @@ const ChartsPage = () => {
         >
           <div className="w-full h-0 pb-[56.25%] relative">
             <div className="absolute top-0 left-0 w-full h-full">
-              <BarCharts data={bargraphData} />
+              {bargraphData && <BarCharts data={bargraphData} />}
             </div>
           </div>
         </BentoGridItem>
@@ -64,7 +85,7 @@ const ChartsPage = () => {
         >
           <div className="w-full h-0 pb-[56.25%] relative">
             <div className="absolute top-0 left-0 w-full h-full">
-              <PieCharts data={piechartData} />
+              {piechartData && <PieCharts data={piechartData} />}
             </div>
           </div>
         </BentoGridItem>
