@@ -4,11 +4,7 @@ import LineCharts from "@/components/shared/charts/LineCharts";
 import PieCharts from "@/components/shared/charts/PieCharts";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  appleData,
-  getCoinsPrice,
-  getPriceData,
-} from "@/utils/actions/apiactions";
+import { getCoinsPrice, getPriceData } from "@/utils/actions/apiactions";
 import {
   AreaChart,
   BarChart,
@@ -18,10 +14,10 @@ import {
 } from "lucide-react";
 
 export default async function ChartsPage() {
-  const piechartData = await getCoinsPrice();
-  const bargaphData = await getPriceData();
+  const { coins: piechartData } = await getCoinsPrice();
+  const { prices: bargraphData } = await getPriceData();
 
-  if (!piechartData && !bargaphData) {
+  if (!piechartData || !bargraphData) {
     return (
       <div className="flex items-center justify-center">
         <Loader2 className="animate-spin h-10 w-10 text-primary" />
@@ -29,9 +25,10 @@ export default async function ChartsPage() {
       </div>
     );
   }
+
   return (
     <ScrollArea className="h-[calc(86vh-3rem)] w-full border rounded-md p-6 mb-0">
-      <BentoGrid className="gap-4  md:grid-cols-4 lg:grid-cols-4">
+      <BentoGrid className="gap-4 md:grid-cols-4 lg:grid-cols-4">
         <BentoGridItem
           title="Bar Chart"
           description="Top 8 Crypto Coins and their prices"
@@ -40,7 +37,7 @@ export default async function ChartsPage() {
         >
           <div className="w-full h-0 pb-[56.25%] relative">
             <div className="absolute top-0 left-0 w-full h-full">
-              <BarCharts data={bargaphData} />
+              <BarCharts data={bargraphData} />
             </div>
           </div>
         </BentoGridItem>
@@ -68,7 +65,6 @@ export default async function ChartsPage() {
             </div>
           </div>
         </BentoGridItem>
-
         <BentoGridItem
           title="Line Chart"
           description="A sample line chart"

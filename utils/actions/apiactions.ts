@@ -23,11 +23,12 @@ export async function getCoinsPrice() {
         color: coin.color,
       })
     );
-    return coins;
+    return { coins };
   } catch (error) {
     return { error: true, message: "Error fetching data" };
   }
 }
+
 export async function getPriceData() {
   try {
     const response = await fetch(
@@ -45,7 +46,7 @@ export async function getPriceData() {
         color: coin.color,
       })
     );
-    return prices;
+    return { prices };
   } catch (error) {
     return { error: true, message: "Error fetching data" };
   }
