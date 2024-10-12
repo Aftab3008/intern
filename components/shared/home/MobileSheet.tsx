@@ -5,23 +5,20 @@ import {
   SheetClose,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetFooter,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { navLinks } from "@/constants";
+import { cn } from "@/lib/utils";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
-import { navLinks } from "@/constants";
-import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import { LogOut } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { logout } from "@/utils/actions/actions";
 import LogoutButton from "../LogoutButton";
 
-export default function MobileSheet() {
+export default function MobileSheet({ userId }: { userId: string }) {
   const pathname = usePathname();
   return (
     <Sheet>
@@ -55,10 +52,10 @@ export default function MobileSheet() {
                 {navLinks.map((item) => (
                   <SheetClose key={item.name} asChild>
                     <Link
-                      href={item.href}
+                      href={item.href.replace("{userId}", userId)}
                       key={item.name}
                       className={cn(
-                        pathname == item.href
+                        pathname == item.href.replace("{userId}", userId)
                           ? "bg-muted text-primary"
                           : "text-muted-foreground bg-none",
                         "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary/70 text-xl"

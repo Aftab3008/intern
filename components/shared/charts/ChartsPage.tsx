@@ -27,7 +27,6 @@ const ChartsPage = () => {
       setLoading(true);
       try {
         const result = await fetchCoinData();
-        console.log(result);
         if (result.error) {
           setError(result.message);
         } else {

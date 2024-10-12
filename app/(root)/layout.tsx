@@ -12,6 +12,8 @@ import { getCurrentUser } from "@/utils/actions/useractions";
 import { Loader2, MailIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getInitials } from "@/lib/utils";
 
 export default async function layout({
   children,
@@ -22,9 +24,9 @@ export default async function layout({
 
   if (!user) {
     return (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center w-full h-full">
         <Loader2 className="animate-spin h-10 w-10 text-primary" />
-        <span className="ml-2">Loading user data...</span>
+        <span className="ml-2">Loading...</span>
       </div>
     );
   }
@@ -50,7 +52,7 @@ export default async function layout({
 
           <div className="flex-1">
             <nav className="grid items-start px-2 font-medium lg:px-4 mt-4 gap-4">
-              <DashboardItems />
+              <DashboardItems userId={user?.id} />
             </nav>
           </div>
 
@@ -75,7 +77,7 @@ export default async function layout({
           </div>
           <div className="ml-auto flex items-center gap-x-5">
             <div className="md:hidden flex items-center justify-center">
-              <MobileSheet />
+              <MobileSheet userId={user?.id} />
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -84,13 +86,12 @@ export default async function layout({
                   size="icon"
                   className="rounded-full"
                 >
-                  <Image
-                    src={"/avatar.jpeg"}
-                    alt="User Avatar"
-                    className="rounded-full"
-                    width={30}
-                    height={30}
-                  />
+                  <Avatar>
+                    <AvatarImage src={user.imageUrl} />
+                    <AvatarFallback>
+                      {getInitials(user.firstName, user.lastName)}
+                    </AvatarFallback>
+                  </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">

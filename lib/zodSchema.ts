@@ -37,3 +37,10 @@ export const SignInSchema = z.object({
     message: "Password must be at least 8 characters long",
   }),
 });
+
+export const UpdateSchema = z.object({
+  firstName: z.string().min(3).max(20),
+  lastName: z.string().min(3).max(20),
+  email: z.string().email(),
+  imageUrl: z.optional(z.string()),
+});

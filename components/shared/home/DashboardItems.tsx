@@ -5,16 +5,16 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export function DashboardItems() {
+export function DashboardItems({ userId }: { userId: string }) {
   const pathname = usePathname();
   return (
     <>
       {navLinks.map((item) => (
         <Link
-          href={item.href}
+          href={item.href.replace("{userId}", userId)}
           key={item.name}
           className={cn(
-            pathname == item.href
+            pathname == item.href.replace("{userId}", userId)
               ? "bg-muted text-primary"
               : "text-muted-foreground bg-none",
             "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary/70"

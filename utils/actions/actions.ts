@@ -21,7 +21,6 @@ export async function login({
   });
 
   if (error) {
-    console.log(error.code);
     if (error.code === "email_not_confirmed") {
       const { error: resendError } = await supabase.auth.resend({
         type: "signup",
@@ -83,8 +82,7 @@ export async function signup({
   });
 
   if (error) {
-    console.log(error);
-    return;
+    return { error: { message: "Something went wrong" } };
   }
 
   if (user) {
