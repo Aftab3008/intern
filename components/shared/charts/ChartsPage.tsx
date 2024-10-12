@@ -5,10 +5,24 @@ import PieCharts from "@/components/shared/charts/PieCharts";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { appleData, getCoinsPrice } from "@/utils/actions/apiactions";
-import { AreaChart, BarChart, LineChart, PieChart } from "lucide-react";
+import {
+  AreaChart,
+  BarChart,
+  LineChart,
+  Loader2,
+  PieChart,
+} from "lucide-react";
 
 export default async function ChartsPage() {
   const { coins: piechartData, prices: bargaphData } = await getCoinsPrice();
+  if (!piechartData || !bargaphData) {
+    return (
+      <div className="flex items-center justify-center">
+        <Loader2 className="animate-spin h-10 w-10 text-primary" />
+        <span className="ml-2">Loading user data...</span>
+      </div>
+    );
+  }
   return (
     <ScrollArea className="h-[calc(86vh-3rem)] w-full border rounded-md p-6 mb-0">
       <BentoGrid className="gap-4  md:grid-cols-4 lg:grid-cols-4">
