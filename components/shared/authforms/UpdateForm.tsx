@@ -50,7 +50,7 @@ export default function UpdateForm({ user }: { user: User }) {
   async function onSubmit(values: z.infer<typeof UpdateSchema>) {
     setPending(true);
     try {
-      let fileUrl = null;
+      let fileUrl = user.imageUrl;
       if (file) {
         const supabase = createClient(
           process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -64,14 +64,14 @@ export default function UpdateForm({ user }: { user: User }) {
         if (error) {
           throw new Error("Error uploading image");
         }
-        fileUrl = data.fullPath;
+        fileUrl = process.env.SUPABASE_IMAGE_URL! + "/" + data.fullPath;
       }
       const response = await updateUser({
         id: user.id,
         firstName: values.firstName,
         lastName: values.lastName,
         email: values.email,
-        imageUrl: fileUrl || user.imageUrl,
+        imageUrl: fileUrl,
       });
       if (response.error) {
         setError(response.error);

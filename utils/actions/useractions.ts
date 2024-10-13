@@ -41,7 +41,6 @@ export async function updateUser({
   imageUrl: string;
 }) {
   try {
-    const fileUrl = process.env.SUPABASE_IMAGE_URL! + "/" + imageUrl;
     const user = await prisma.user.update({
       where: {
         id,
@@ -50,7 +49,7 @@ export async function updateUser({
         firstName,
         lastName,
         email,
-        imageUrl: fileUrl,
+        imageUrl,
       },
     });
     revalidatePath("/", "layout");
