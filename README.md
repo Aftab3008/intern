@@ -113,14 +113,14 @@ Explore the DigitX project through the following key pages:
 #### <a name="homepage">Homepage</a>
 
 <div align="center">
-  <img src="https://github.com/Aftab3008/intern/blob/main/public/homepage.png" alt="Homepage" width="600" />
+  <img src="https://github.com/Aftab3008/intern/blob/main/public/homepagemain.png" alt="Homepage" width="600" />
 </div>
 <p align="center">The Homepage features a welcoming interface with quick access to various sections of the application.</p>
 
 #### <a name="profile-page">Profile Page</a>
 
 <div align="center">
-  <img src="https://github.com/Aftab3008/intern/blob/main/public/profilepage.png" alt="Profile Page" width="600" />
+  <img src="https://github.com/Aftab3008/intern/blob/main/public/profilpagemain.png" alt="Profile Page" width="600" />
 </div>
 <p align="center">The Profile Page displays user information and allows for profile management.</p>
 
