@@ -88,22 +88,53 @@ pnpm run dev
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
 
 ## <a name="demo">Demo</a>
-<a name="screenshots">📸 Screenshots</a>
 
-<a name="login-page">Login Page</a>
-<div align="center">
-  <img src="[https://github.com/Aftab3008/intern/blob/main/public/loginpage.png]" alt="Login Page" width="600" /> 
-</div>
-<a name="signup-page">Signup Page</a>
-<div align="center"> 
-  <img src="path/to/signup-screenshot.png" alt="Signup Page" width="600" /> 
-</div>
-<a name="homepage">Homepage</a>
-<div align="center">
-  <img src="path/to/homepage-screenshot.png" alt="Homepage" width="600" />
-</div>
-<a name="profile-page">Profile Page</a>
-<div align="center"> 
-  <img src="path/to/profile-screenshot.png" alt="Profile Page" width="600" /> 
-</div>
+Explore the DigitX project through the following key pages:
 
+### <a name="screenshots">📸 Screenshots</a>
+
+#### <a name="login-page">Login Page</a>
+<div align="center">
+  <img src="https://github.com/Aftab3008/intern/blob/main/public/loginpage.png" alt="Login Page" width="600" />
+</div>
+<p align="center">The Login Page allows users to enter their credentials and access their accounts.</p>
+
+#### <a name="signup-page">Signup Page</a>
+<div align="center">
+  <img src="https://github.com/Aftab3008/intern/blob/main/public/signuppage.png" alt="Signup Page" width="600" />
+</div>
+<p align="center">The Signup Page enables new users to create an account by providing their details.</p>
+
+#### <a name="homepage">Homepage</a>
+<div align="center">
+  <img src="https://github.com/Aftab3008/intern/blob/main/public/homepage.png" alt="Homepage" width="600" />
+</div>
+<p align="center">The Homepage features a welcoming interface with quick access to various sections of the application.</p>
+
+#### <a name="profile-page">Profile Page</a>
+<div align="center">
+  <img src="https://github.com/Aftab3008/intern/blob/main/public/profilepage.png" alt="Profile Page" width="600" />
+</div>
+<p align="center">The Profile Page displays user information and allows for profile management.</p>
+
+<a name="footer">📞 Contact Us</a>
+<div align="center" style="margin-top: 40px; font-family: 'Arial', sans-serif; background-color: #f8f9fa; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+  <h2 style="font-size: 24px; color: #333;">Get in Touch</h2>
+  <p style="font-size: 18px; color: #333;">
+    Email: <a href="mailto:shaikaftab005@gmail.com" style="color: #0077B5; text-decoration: none; font-weight: bold;">shaikaftab005@gmail.com</a><br>
+  </p>
+  <div style="margin-top: 20px;">
+    <a href="https://x.com/shaikaf70807885" target="_blank" style="margin-right: 10px;">
+      <img src="https://img.shields.io/badge/-Twitter-black?style=for-the-badge&logo=twitter&logoColor=1DA1F2" alt="Twitter" />
+    </a>
+    <a href="https://www.linkedin.com/in/aftab-shaik-907921256/" target="_blank" style="margin-right: 10px;">
+      <img src="https://img.shields.io/badge/-LinkedIn-black?style=for-the-badge&logo=linkedin&logoColor=0077B5" alt="LinkedIn" />
+    </a>
+    <a href="https://github.com/Aftab3008" target="_blank">
+      <img src="https://img.shields.io/badge/-GitHub-black?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+    </a>
+  </div>
+  <p style="margin-top: 20px; font-size: 14px; color: #555;">
+    &copy; 2024 DigitX. All rights reserved.
+  </p>
+</div>
