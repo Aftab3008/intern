@@ -20,11 +20,9 @@ export async function GET(request: NextRequest) {
       });
 
       if (!error) {
-        // redirect user to specified redirect URL or root of app
         redirect(next);
-        return;
       } else {
-        console.error("OTP verification failed:", error);
+        console.error("Email verification failed:", error);
       }
     } catch (err) {
       console.error("An unexpected error occurred:", err);
@@ -33,6 +31,5 @@ export async function GET(request: NextRequest) {
     console.error("Missing token_hash or type in query parameters.");
   }
 
-  // redirect the user to an error page with some instructions
   redirect("/signin");
 }
