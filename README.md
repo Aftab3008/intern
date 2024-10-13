@@ -124,13 +124,15 @@ Explore the DigitX project through the following key pages:
 </div>
 <p align="center">The Profile Page displays user information and allows for profile management.</p>
 
-<a name="dark-mode">🌙 Dark Mode</a>
+## <a name="dark-mode">🌙 Dark Mode</a>
+
 DigitX supports a dark mode feature to enhance user experience in low-light environments. To toggle dark mode:
 
--Toggle Button: Use the dark mode toggle button located in the header or settings menu to switch between light and dark themes.
--Persistent Theme: The selected theme will persist across sessions using local storage.
+- Toggle Button: Use the dark mode toggle button located in the header or settings menu to switch between light and dark themes.
 
-<a name="footer">📞 Contact Us</a>
+- Persistent Theme: The selected theme will persist across sessions using local storage.
+
+## <a name="footer">📞 Contact Us</a>
 
 <div align="center" style="margin-top: 40px; font-family: 'Arial', sans-serif; background-color: #f8f9fa; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
   <h2 style="font-size: 24px; color: #333;">Get in Touch</h2>
