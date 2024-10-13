@@ -1,6 +1,7 @@
 # DigitX
 
 DigitX is a digital agency that specializes in web development.
+
 <div align="center">
   <div>
     <img src="https://img.shields.io/badge/-Next_JS-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="nextdotjs" />
@@ -26,6 +27,7 @@ DigitX is a digital agency that specializes in web development.
 - Supabase
 - Shadcn
 - TailwindCSS
+- Prisma
 
 ## <a name="quick-start">🤸 Quick Start</a>
 
@@ -58,6 +60,7 @@ pnpm install
 ```bash
 pnpm run dev
 ```
+
 **Set Up Environment Variables**
 
 Create a new file named `.env.local` in the root of your project and add the following content:
@@ -94,30 +97,35 @@ Explore the DigitX project through the following key pages:
 ### <a name="screenshots">📸 Screenshots</a>
 
 #### <a name="login-page">Login Page</a>
+
 <div align="center">
   <img src="https://github.com/Aftab3008/intern/blob/main/public/loginpage.png" alt="Login Page" width="600" />
 </div>
 <p align="center">The Login Page allows users to enter their credentials and access their accounts.</p>
 
 #### <a name="signup-page">Signup Page</a>
+
 <div align="center">
   <img src="https://github.com/Aftab3008/intern/blob/main/public/signuppage.png" alt="Signup Page" width="600" />
 </div>
 <p align="center">The Signup Page enables new users to create an account by providing their details.</p>
 
 #### <a name="homepage">Homepage</a>
+
 <div align="center">
   <img src="https://github.com/Aftab3008/intern/blob/main/public/homepage.png" alt="Homepage" width="600" />
 </div>
 <p align="center">The Homepage features a welcoming interface with quick access to various sections of the application.</p>
 
 #### <a name="profile-page">Profile Page</a>
+
 <div align="center">
   <img src="https://github.com/Aftab3008/intern/blob/main/public/profilepage.png" alt="Profile Page" width="600" />
 </div>
 <p align="center">The Profile Page displays user information and allows for profile management.</p>
 
 <a name="footer">📞 Contact Us</a>
+
 <div align="center" style="margin-top: 40px; font-family: 'Arial', sans-serif; background-color: #f8f9fa; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
   <h2 style="font-size: 24px; color: #333;">Get in Touch</h2>
   <p style="font-size: 18px; color: #333;">
