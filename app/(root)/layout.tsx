@@ -14,6 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getInitials } from "@/lib/utils";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
 
 export default async function layout({
   children,
@@ -79,28 +80,31 @@ export default async function layout({
             <div className="md:hidden flex items-center justify-center">
               <MobileSheet userId={user?.id} />
             </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  className="rounded-full"
-                >
-                  <Avatar>
-                    <AvatarImage src={user.imageUrl} />
-                    <AvatarFallback>
-                      {getInitials(user.firstName, user.lastName)}
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>
-                  <MailIcon className="h-5 w-5 mr-2" />
-                  <h2 className="text-xs text-wrap">{user?.email}</h2>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="flex gap-4">
+              <ThemeToggle />
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    className="rounded-full flex gap-4"
+                  >
+                    <Avatar>
+                      <AvatarImage src={user.imageUrl} />
+                      <AvatarFallback>
+                        {getInitials(user.firstName, user.lastName)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>
+                    <MailIcon className="h-5 w-5 mr-2" />
+                    <h2 className="text-xs text-wrap">{user?.email}</h2>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">

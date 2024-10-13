@@ -2,7 +2,7 @@
 
 const options = {
   headers: {
-    "x-access-token": process.env.API_KEY!,
+    "x-access-token": process.env.COINRANKING_API_KEY!,
   },
 };
 
